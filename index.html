@@ -1,17 +1,17 @@
-```html
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Cidade Limpa Manaus — Backlog e Sprints</title>
+    <title>
+        Cidade Limpa Manaus — Backlog, Sprints & Chatbot Interativo
+    </title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet"
@@ -19,8 +19,8 @@
 
     <!-- Material Symbols -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
 
     <!-- Tailwind CSS -->
@@ -45,52 +45,83 @@
                             900: "#14532d",
                         },
                     },
+
+                    keyframes: {
+                        pulseSubtle: {
+                            "0%, 100%": {
+                                transform: "scale(1)",
+                            },
+                            "50%": {
+                                transform: "scale(1.05)",
+                            },
+                        },
+                    },
+
+                    animation: {
+                        "pulse-subtle":
+                            "pulseSubtle 2.5s infinite ease-in-out",
+                    },
                 },
             },
         };
     </script>
 </head>
 
-<body class="bg-slate-50 text-slate-800 antialiased font-sans flex flex-col min-h-screen">
+<body
+    class="bg-slate-50 text-slate-800 antialiased font-sans flex flex-col min-h-screen relative"
+>
 
     <!-- =========================================================
          BARRA DE NAVEGAÇÃO
     ========================================================== -->
 
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <header
+        class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm"
+    >
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between"
+        >
 
             <!-- Logo -->
             <div class="flex items-center gap-3">
 
-                <div class="w-10 h-10 rounded-xl bg-brand-700 flex items-center justify-center text-white shadow-md">
+                <div
+                    class="w-10 h-10 rounded-xl bg-brand-700 flex items-center justify-center text-white shadow-md"
+                >
                     <span class="material-symbols-outlined text-2xl">
                         eco
                     </span>
                 </div>
 
                 <div>
-                    <span class="font-bold text-lg text-slate-900 tracking-tight flex items-center gap-1.5">
+                    <span
+                        class="font-bold text-lg text-slate-900 tracking-tight flex items-center gap-1.5"
+                    >
                         Cidade Limpa
 
                         <span
-                            class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-brand-800 font-semibold uppercase tracking-wider">
+                            class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-brand-800 font-semibold uppercase tracking-wider"
+                        >
                             Manaus
                         </span>
                     </span>
 
-                    <p class="text-xs text-slate-500 font-medium hidden sm:block">
+                    <p
+                        class="text-xs text-slate-500 font-medium hidden sm:block"
+                    >
                         Projeto Integrador & Extensão • ADS 2º Período
                     </p>
                 </div>
-
             </div>
 
             <!-- Menu -->
-            <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600">
-
-                <a href="#backlog-vs-sprint" class="hover:text-brand-700 transition-colors">
+            <nav
+                class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600"
+            >
+                <a
+                    href="#backlog-vs-sprint"
+                    class="hover:text-brand-700 transition-colors"
+                >
                     Visão Geral
                 </a>
 
@@ -102,27 +133,48 @@
                     Product Backlog
                 </a>
 
-                <a href="#sprints" class="hover:text-brand-700 transition-colors">
+                <a
+                    href="#sprints"
+                    class="hover:text-brand-700 transition-colors"
+                >
                     Sprints
                 </a>
 
-                <a href="#ods11" class="hover:text-brand-700 transition-colors">
+                <a
+                    href="#ods11"
+                    class="hover:text-brand-700 transition-colors"
+                >
                     Alinhamento ODS 11
                 </a>
 
-                <a href="#arquitetura" class="hover:text-brand-700 transition-colors">
+                <a
+                    href="#arquitetura"
+                    class="hover:text-brand-700 transition-colors"
+                >
                     Arquitetura Técnica
                 </a>
-
             </nav>
 
-            <!-- Identificação -->
+            <!-- Botão & Identificação -->
             <div class="flex items-center gap-2">
+
+                <button
+                    onclick="toggleChat()"
+                    class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold shadow-sm transition-all"
+                >
+                    <span class="material-symbols-outlined text-base">
+                        smart_toy
+                    </span>
+
+                    Chatbot de Dúvidas
+                </button>
 
                 <span
                     class="px-3 py-1.5 rounded-lg bg-emerald-50 text-brand-800 border border-emerald-200 text-xs font-bold flex items-center gap-1.5"
                 >
-                    <span class="material-symbols-outlined text-sm text-brand-700">
+                    <span
+                        class="material-symbols-outlined text-sm text-brand-700"
+                    >
                         school
                     </span>
 
@@ -130,9 +182,7 @@
                 </span>
 
             </div>
-
         </div>
-
     </header>
 
 
@@ -140,18 +190,21 @@
          CONTEÚDO PRINCIPAL
     ========================================================== -->
 
-    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full space-y-12">
-
+    <main
+        class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full space-y-12"
+    >
 
         <!-- =====================================================
-             HERO
+             HERO SECTION
         ====================================================== -->
 
         <section
             class="bg-gradient-to-br from-emerald-900 via-emerald-800 to-slate-900 rounded-3xl p-8 sm:p-12 text-white shadow-xl relative overflow-hidden"
         >
 
-            <div class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none">
+            <div
+                class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none"
+            >
                 <span class="material-symbols-outlined text-[320px]">
                     forest
                 </span>
@@ -162,45 +215,64 @@
                 <div
                     class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-medium text-emerald-200"
                 >
-                    <span class="material-symbols-outlined text-sm text-emerald-400">
+                    <span
+                        class="material-symbols-outlined text-sm text-emerald-400"
+                    >
                         psychology
                     </span>
 
                     Metodologia Ágil no Scrum Acadêmico
                 </div>
 
-                <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+                <h1
+                    class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight"
+                >
                     Cidade Limpa — Manaus
                 </h1>
 
-                <p class="text-emerald-100 text-base sm:text-lg font-normal leading-relaxed">
-                    Plataforma web de conscientização comunitária e zeladoria urbana
-                    voltada ao combate de lixeiras viciadas, preservação dos igarapés
-                    amazônicos e suporte à coleta seletiva na capital do Amazonas.
+                <p
+                    class="text-emerald-100 text-base sm:text-lg font-normal leading-relaxed"
+                >
+                    Plataforma web de conscientização comunitária e zeladoria
+                    urbana voltada ao combate de lixeiras viciadas, preservação
+                    dos igarapés amazônicos e suporte à coleta seletiva na
+                    capital do Amazonas.
                 </p>
 
                 <div class="pt-2 flex flex-wrap items-center gap-3 text-xs">
 
-                    <span class="px-3 py-1.5 rounded-lg bg-white/10 font-medium">
+                    <span
+                        class="px-3 py-1.5 rounded-lg bg-white/10 font-medium"
+                    >
                         🎯 ODS 11 — Meta 11.6
                     </span>
 
-                    <span class="px-3 py-1.5 rounded-lg bg-white/10 font-medium">
+                    <span
+                        class="px-3 py-1.5 rounded-lg bg-white/10 font-medium"
+                    >
                         📊 50 Story Points Mapeados
                     </span>
 
-                    <span class="px-3 py-1.5 rounded-lg bg-white/10 font-medium">
+                    <span
+                        class="px-3 py-1.5 rounded-lg bg-white/10 font-medium"
+                    >
                         ⚡ 3 Sprints Planejadas
                     </span>
 
-                    <span class="px-3 py-1.5 rounded-lg bg-white/10 font-medium">
+                    <span
+                        class="px-3 py-1.5 rounded-lg bg-white/10 font-medium"
+                    >
+                        🤖 Chatbot Cívico Integrado
+                    </span>
+
+                    <span
+                        class="px-3 py-1.5 rounded-lg bg-white/10 font-medium"
+                    >
                         💻 Stack: HTML5 • CSS3 • JS • Python • MySQL
                     </span>
 
                 </div>
-
             </div>
-
         </section>
 
 
@@ -210,216 +282,392 @@
 
         <section id="backlog-vs-sprint" class="space-y-4">
 
-            <div class="flex items-center justify-between border-b border-slate-200 pb-3">
-
+            <div
+                class="flex items-center justify-between border-b border-slate-200 pb-3"
+            >
                 <div>
-                    <span class="text-xs uppercase font-extrabold text-brand-700 tracking-wider">
+
+                    <span
+                        class="text-xs uppercase font-extrabold text-brand-700 tracking-wider"
+                    >
                         Engenharia de Software Ágil
                     </span>
 
                     <h2 class="text-2xl font-bold text-slate-900">
                         Backlog vs. Sprint no Scrum Acadêmico
                     </h2>
+
                 </div>
 
-                <span class="text-xs text-slate-500 max-w-xs text-right hidden sm:block">
+                <span
+                    class="text-xs text-slate-500 max-w-xs text-right hidden sm:block"
+                >
                     Conceito-chave para a banca avaliadora do 2º período de ADS
                 </span>
-
             </div>
 
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- GRID DOS CARDS -->
 
-                <!-- Product Backlog -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-                <div class="bg-white border-2 border-emerald-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                <!-- CARD 1: PRODUCT BACKLOG -->
 
-                    <div class="flex items-center justify-between mb-4">
+                <div
+                    class="bg-white border-2 border-emerald-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"
+                >
 
-                        <div class="flex items-center gap-3">
+                    <div>
 
-                            <div
-                                class="w-10 h-10 rounded-xl bg-emerald-100 text-brand-800 flex items-center justify-center font-bold"
+                        <div
+                            class="flex items-center justify-between mb-4"
+                        >
+
+                            <div class="flex items-center gap-3">
+
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-emerald-100 text-brand-800 flex items-center justify-center font-bold"
+                                >
+                                    <span
+                                        class="material-symbols-outlined"
+                                    >
+                                        format_list_bulleted
+                                    </span>
+                                </div>
+
+                                <div>
+
+                                    <span
+                                        class="text-xs font-bold text-brand-700 uppercase"
+                                    >
+                                        Visão Global do Produto
+                                    </span>
+
+                                    <h3
+                                        class="text-lg font-bold text-slate-900"
+                                    >
+                                        Product Backlog
+                                    </h3>
+
+                                </div>
+                            </div>
+
+                            <span
+                                class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold"
                             >
-                                <span class="material-symbols-outlined">
-                                    format_list_bulleted
-                                </span>
-                            </div>
-
-                            <div>
-                                <span class="text-xs font-bold text-brand-700 uppercase">
-                                    Visão Global do Produto
-                                </span>
-
-                                <h3 class="text-lg font-bold text-slate-900">
-                                    Product Backlog
-                                </h3>
-                            </div>
+                                10 Itens
+                            </span>
 
                         </div>
 
-                        <span class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold">
-                            10 Itens Mapeados
-                        </span>
+                        <div
+                            class="p-4 rounded-xl bg-slate-50 border border-slate-100 mb-4 text-sm text-slate-600 space-y-2"
+                        >
+                            <p>
+                                <strong>Definição do Projeto:</strong>
+                                O TODO que a plataforma Cidade Limpa precisa
+                                ter. Uma visão macro e priorizada de todas as
+                                funcionalidades e requisitos.
+                            </p>
+                        </div>
+
+                        <ul class="text-xs text-slate-600 space-y-2">
+
+                            <li class="flex items-center gap-2">
+                                <span
+                                    class="material-symbols-outlined text-emerald-600 text-base"
+                                >
+                                    check_circle
+                                </span>
+
+                                Artefato dinâmico repriorizado pelo Product
+                                Owner de ADS.
+                            </li>
+
+                            <li class="flex items-center gap-2">
+                                <span
+                                    class="material-symbols-outlined text-emerald-600 text-base"
+                                >
+                                    check_circle
+                                </span>
+
+                                Alimenta os ciclos quinzenais focados em
+                                impacto na ODS 11.
+                            </li>
+
+                        </ul>
 
                     </div>
 
-
-                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 mb-4 text-sm text-slate-600">
-
-                        <p>
-                            <strong>Definição do Projeto:</strong>
-                            O TODO que a plataforma Cidade Limpa precisa ter.
-                            Uma visão macro, holística e priorizada de todas as
-                            funcionalidades, requisitos funcionais e melhorias.
-                        </p>
-
-                    </div>
-
-
-                    <ul class="text-xs text-slate-600 space-y-2">
-
-                        <li class="flex items-center gap-2">
-                            <span class="material-symbols-outlined text-emerald-600 text-base">
-                                check_circle
-                            </span>
-
-                            Artefato dinâmico repriorizado continuamente pelo
-                            Product Owner do grupo ADS.
-                        </li>
-
-                        <li class="flex items-center gap-2">
-                            <span class="material-symbols-outlined text-emerald-600 text-base">
-                                check_circle
-                            </span>
-
-                            Alimenta os ciclos de desenvolvimento quinzenais
-                            com foco em impacto social.
-                        </li>
-
-                    </ul>
-
-
-                    <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between text-xs text-slate-500 font-semibold">
-
-                        <span>
-                            Escopo: Sistema Completo
-                        </span>
+                    <div
+                        class="mt-4 pt-3 border-t border-slate-100 flex justify-between text-xs text-slate-500 font-semibold"
+                    >
+                        <span>Escopo: Sistema Completo</span>
 
                         <span class="text-emerald-700">
-                            Horizonte: 1 Semestre Letivo
+                            1 Semestre Letivo
                         </span>
-
                     </div>
 
                 </div>
 
 
-                <!-- Sprint -->
+                <!-- CARD 2: SPRINT -->
 
-                <div class="bg-white border-2 border-amber-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                <div
+                    class="bg-white border-2 border-amber-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"
+                >
 
-                    <div class="flex items-center justify-between mb-4">
+                    <div>
 
-                        <div class="flex items-center gap-3">
+                        <div
+                            class="flex items-center justify-between mb-4"
+                        >
 
-                            <div
-                                class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center font-bold"
+                            <div class="flex items-center gap-3">
+
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center font-bold"
+                                >
+                                    <span
+                                        class="material-symbols-outlined"
+                                    >
+                                        timer
+                                    </span>
+                                </div>
+
+                                <div>
+
+                                    <span
+                                        class="text-xs font-bold text-amber-700 uppercase"
+                                    >
+                                        Execução em Timebox
+                                    </span>
+
+                                    <h3
+                                        class="text-lg font-bold text-slate-900"
+                                    >
+                                        Sprint Ciclo Ágil
+                                    </h3>
+
+                                </div>
+                            </div>
+
+                            <span
+                                class="px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-xs font-semibold"
                             >
-                                <span class="material-symbols-outlined">
-                                    timer
-                                </span>
-                            </div>
-
-                            <div>
-                                <span class="text-xs font-bold text-amber-700 uppercase">
-                                    Execução em Timebox
-                                </span>
-
-                                <h3 class="text-lg font-bold text-slate-900">
-                                    Sprint Ciclo Ágil
-                                </h3>
-                            </div>
+                                Sprint 1 Ativa
+                            </span>
 
                         </div>
 
-                        <span class="px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-xs font-semibold">
-                            Sprint 1 Ativa
-                        </span>
+                        <div
+                            class="p-4 rounded-xl bg-amber-50/60 border border-amber-100 mb-4 text-sm text-slate-600 space-y-2"
+                        >
+                            <p>
+                                <strong>Definição do Projeto:</strong>
+                                O CICLO DE ENTREGA em execução. Período
+                                quinzenal com metas palpáveis, tarefas
+                                divididas e incrementos testáveis.
+                            </p>
+                        </div>
+
+                        <ul class="text-xs text-slate-600 space-y-2">
+
+                            <li class="flex items-center gap-2">
+                                <span
+                                    class="material-symbols-outlined text-amber-600 text-base"
+                                >
+                                    check_circle
+                                </span>
+
+                                Meta: MVP de denúncia de lixo e
+                                conscientização ambiental.
+                            </li>
+
+                            <li class="flex items-center gap-2">
+                                <span
+                                    class="material-symbols-outlined text-amber-600 text-base"
+                                >
+                                    check_circle
+                                </span>
+
+                                Reuniões periódicas do grupo com docentes
+                                avaliadores.
+                            </li>
+
+                        </ul>
 
                     </div>
 
-
-                    <div class="p-4 rounded-xl bg-amber-50/60 border border-amber-100 mb-4 text-sm text-slate-600">
-
-                        <p>
-                            <strong>Definição do Projeto:</strong>
-                            O CICLO DE ENTREGA em execução.
-                            Período delimitado (timebox) com metas palpáveis,
-                            tarefas divididas e entregáveis funcionais testáveis em produção.
-                        </p>
-
-                    </div>
-
-
-                    <ul class="text-xs text-slate-600 space-y-2">
-
-                        <li class="flex items-center gap-2">
-
-                            <span class="material-symbols-outlined text-amber-600 text-base">
-                                check_circle
-                            </span>
-
-                            Objetivo fixo por iteração: MVP de denúncia de lixo
-                            e conscientização ambiental.
-
-                        </li>
-
-                        <li class="flex items-center gap-2">
-
-                            <span class="material-symbols-outlined text-amber-600 text-base">
-                                check_circle
-                            </span>
-
-                            Reuniões periódicas do grupo e alinhamento
-                            com os docentes de ADS.
-
-                        </li>
-
-                    </ul>
-
-
-                    <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between text-xs text-slate-500 font-semibold">
-
-                        <span>
-                            Ritmo: Quinzenal (14 dias)
-                        </span>
+                    <div
+                        class="mt-4 pt-3 border-t border-slate-100 flex justify-between text-xs text-slate-500 font-semibold"
+                    >
+                        <span>Ritmo: Quinzenal (14 dias)</span>
 
                         <span class="text-amber-700">
-                            Meta: Incremento de Software
+                            Incremento de Software
                         </span>
+                    </div>
+
+                </div>
+
+
+                <!-- CARD 3: CHATBOT -->
+
+                <div
+                    class="bg-gradient-to-b from-white to-emerald-50/70 border-2 border-emerald-300 rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow flex flex-col justify-between relative overflow-hidden ring-2 ring-emerald-500/20"
+                >
+
+                    <div
+                        class="absolute -right-6 -bottom-6 opacity-5 pointer-events-none"
+                    >
+                        <span
+                            class="material-symbols-outlined text-[140px] text-emerald-800"
+                        >
+                            smart_toy
+                        </span>
+                    </div>
+
+                    <div>
+
+                        <div
+                            class="flex items-center justify-between mb-3"
+                        >
+
+                            <div class="flex items-center gap-3">
+
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-brand-700 text-white flex items-center justify-center font-bold shadow-md"
+                                >
+                                    <span
+                                        class="material-symbols-outlined text-xl"
+                                    >
+                                        smart_toy
+                                    </span>
+                                </div>
+
+                                <div>
+
+                                    <span
+                                        class="text-xs font-bold text-emerald-800 uppercase tracking-wider"
+                                    >
+                                        Assistente Virtual ADS
+                                    </span>
+
+                                    <h3
+                                        class="text-lg font-bold text-slate-900"
+                                    >
+                                        Curumim Verde
+                                    </h3>
+
+                                </div>
+                            </div>
+
+                            <span
+                                class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-bold flex items-center gap-1"
+                            >
+                                <span
+                                    class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
+                                ></span>
+
+                                Chatbot Online
+                            </span>
+
+                        </div>
+
+                        <p
+                            class="text-xs text-slate-600 mb-3 leading-relaxed"
+                        >
+                            Tire dúvidas rápidas sobre descarte, igarapés,
+                            ecopontos e o projeto de ADS:
+                        </p>
+
+                        <!-- Perguntas rápidas -->
+
+                        <div class="space-y-2 mb-4">
+
+                            <button
+                                onclick="askFromInline('Como denunciar lixo em um igarapé ou terreno?')"
+                                class="w-full text-left p-2.5 rounded-xl bg-white hover:bg-emerald-100/60 border border-emerald-200 text-slate-700 hover:text-brand-800 text-xs font-medium transition-all flex items-center justify-between shadow-xs group"
+                            >
+                                <span class="truncate">
+                                    📍 Como denunciar lixo irregular?
+                                </span>
+
+                                <span
+                                    class="material-symbols-outlined text-sm text-emerald-600 group-hover:translate-x-1 transition-transform"
+                                >
+                                    arrow_forward
+                                </span>
+                            </button>
+
+                            <button
+                                onclick="askFromInline('Onde descartar recicláveis e onde ficam os ecopontos?')"
+                                class="w-full text-left p-2.5 rounded-xl bg-white hover:bg-emerald-100/60 border border-emerald-200 text-slate-700 hover:text-brand-800 text-xs font-medium transition-all flex items-center justify-between shadow-xs group"
+                            >
+                                <span class="truncate">
+                                    ♻️ Onde ficam os Ecopontos de Manaus?
+                                </span>
+
+                                <span
+                                    class="material-symbols-outlined text-sm text-emerald-600 group-hover:translate-x-1 transition-transform"
+                                >
+                                    arrow_forward
+                                </span>
+                            </button>
+
+                            <button
+                                onclick="askFromInline('O que é a ODS 11 e qual o propósito deste projeto acadêmico?')"
+                                class="w-full text-left p-2.5 rounded-xl bg-white hover:bg-emerald-100/60 border border-emerald-200 text-slate-700 hover:text-brand-800 text-xs font-medium transition-all flex items-center justify-between shadow-xs group"
+                            >
+                                <span class="truncate">
+                                    🎓 ODS 11 e o projeto de ADS
+                                </span>
+
+                                <span
+                                    class="material-symbols-outlined text-sm text-emerald-600 group-hover:translate-x-1 transition-transform"
+                                >
+                                    arrow_forward
+                                </span>
+                            </button>
+
+                        </div>
 
                     </div>
+
+                    <button
+                        onclick="toggleChat()"
+                        class="w-full py-2.5 px-4 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2"
+                    >
+                        <span class="material-symbols-outlined text-base">
+                            forum
+                        </span>
+
+                        Abrir Conversa com o Curumim
+                    </button>
 
                 </div>
 
             </div>
-
         </section>
 
 
         <!-- =====================================================
-             PRODUCT BACKLOG
+             PRODUCT BACKLOG GERAL
         ====================================================== -->
 
         <section id="backlog" class="space-y-4">
 
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
+            <div
+                class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3"
+            >
 
                 <div>
 
-                    <span class="text-xs uppercase font-extrabold text-brand-700 tracking-wider">
+                    <span
+                        class="text-xs uppercase font-extrabold text-brand-700 tracking-wider"
+                    >
                         Artefato Oficial Scrum • Repositório Central
                     </span>
 
@@ -428,85 +676,110 @@
                     </h2>
 
                     <p class="text-xs text-slate-500">
-                        Lista completa, priorizada e estimada em Story Points (SP)
-                        para a cidade de Manaus
+                        Lista completa, priorizada e estimada em Story Points
+                        (SP) para a cidade de Manaus
                     </p>
 
                 </div>
 
                 <div class="flex items-center gap-2 text-xs">
 
-                    <span class="px-3 py-1.5 rounded-lg bg-emerald-100 text-brand-800 font-bold">
+                    <span
+                        class="px-3 py-1.5 rounded-lg bg-emerald-100 text-brand-800 font-bold"
+                    >
                         10 Histórias (100% Cobertas)
                     </span>
 
-                    <span class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 font-bold">
+                    <span
+                        class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 font-bold"
+                    >
                         Total: 50 SP
                     </span>
 
                 </div>
-
             </div>
 
 
-            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div
+                class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden"
+            >
 
                 <div class="overflow-x-auto">
 
                     <table class="w-full text-left text-sm">
 
-                        <thead class="bg-slate-50 text-slate-600 text-xs uppercase font-bold border-b border-slate-200">
-
+                        <thead
+                            class="bg-slate-50 text-slate-600 text-xs uppercase font-bold border-b border-slate-200"
+                        >
                             <tr>
+
                                 <th class="py-3.5 px-4">ID</th>
                                 <th class="py-3.5 px-4">Módulo / Épico</th>
-                                <th class="py-3.5 px-4">Requisito & Estória de Usuário</th>
+                                <th class="py-3.5 px-4">
+                                    Requisito & Estória de Usuário
+                                </th>
                                 <th class="py-3.5 px-4">Prioridade</th>
                                 <th class="py-3.5 px-4">Pontos</th>
                                 <th class="py-3.5 px-4">Alocação</th>
                                 <th class="py-3.5 px-4">Status</th>
-                            </tr>
 
+                            </tr>
                         </thead>
 
-
-                        <tbody class="divide-y divide-slate-100 text-slate-700 font-medium text-xs">
+                        <tbody
+                            class="divide-y divide-slate-100 text-slate-700 font-medium text-xs"
+                        >
 
                             <!-- PB-01 -->
 
-                            <tr class="hover:bg-slate-50/80 transition-colors">
+                            <tr
+                                class="hover:bg-slate-50/80 transition-colors"
+                            >
 
-                                <td class="py-3 px-4 font-bold text-emerald-800">
+                                <td
+                                    class="py-3 px-4 font-bold text-emerald-800"
+                                >
                                     PB-01
                                 </td>
 
-                                <td class="py-3 px-4 font-semibold text-slate-900">
+                                <td
+                                    class="py-3 px-4 font-semibold text-slate-900"
+                                >
                                     Portal & ODS 11
                                 </td>
 
                                 <td class="py-3 px-4 text-slate-600">
-                                    Página inicial informativa com conscientização
-                                    sobre descarte correto e ODS 11 em Manaus.
+                                    Página inicial informativa com
+                                    conscientização sobre descarte correto e
+                                    ODS 11 em Manaus.
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded bg-red-100 text-red-700 font-bold">
+                                    <span
+                                        class="px-2 py-0.5 rounded bg-red-100 text-red-700 font-bold"
+                                    >
                                         ALTA
                                     </span>
                                 </td>
 
-                                <td class="py-3 px-4 font-bold text-slate-800">
+                                <td
+                                    class="py-3 px-4 font-bold text-slate-800"
+                                >
                                     5 SP
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded bg-orange-100 text-orange-800 font-semibold">
+                                    <span
+                                        class="px-2 py-0.5 rounded bg-orange-100 text-orange-800 font-semibold"
+                                    >
                                         Sprint 1
                                     </span>
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold">
+                                    <span
+                                        class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold"
+                                    >
                                         ✔ Concluído
                                     </span>
                                 </td>
@@ -516,39 +789,53 @@
 
                             <!-- PB-02 -->
 
-                            <tr class="hover:bg-slate-50/80 transition-colors">
+                            <tr
+                                class="hover:bg-slate-50/80 transition-colors"
+                            >
 
-                                <td class="py-3 px-4 font-bold text-emerald-800">
+                                <td
+                                    class="py-3 px-4 font-bold text-emerald-800"
+                                >
                                     PB-02
                                 </td>
 
-                                <td class="py-3 px-4 font-semibold text-slate-900">
+                                <td
+                                    class="py-3 px-4 font-semibold text-slate-900"
+                                >
                                     Interface Base
                                 </td>
 
                                 <td class="py-3 px-4 text-slate-600">
-                                    Menu de navegação responsivo, tipografia
-                                    e acessibilidade WCAG padronizada.
+                                    Menu de navegação responsivo, tipografia e
+                                    acessibilidade WCAG padronizada.
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded bg-red-100 text-red-700 font-bold">
+                                    <span
+                                        class="px-2 py-0.5 rounded bg-red-100 text-red-700 font-bold"
+                                    >
                                         ALTA
                                     </span>
                                 </td>
 
-                                <td class="py-3 px-4 font-bold text-slate-800">
+                                <td
+                                    class="py-3 px-4 font-bold text-slate-800"
+                                >
                                     3 SP
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded bg-orange-100 text-orange-800 font-semibold">
+                                    <span
+                                        class="px-2 py-0.5 rounded bg-orange-100 text-orange-800 font-semibold"
+                                    >
                                         Sprint 1
                                     </span>
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold">
+                                    <span
+                                        class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold"
+                                    >
                                         ✔ Concluído
                                     </span>
                                 </td>
@@ -558,39 +845,54 @@
 
                             <!-- PB-03 -->
 
-                            <tr class="hover:bg-slate-50/80 transition-colors bg-amber-50/40">
+                            <tr
+                                class="hover:bg-slate-50/80 transition-colors bg-amber-50/40"
+                            >
 
-                                <td class="py-3 px-4 font-bold text-emerald-800">
+                                <td
+                                    class="py-3 px-4 font-bold text-emerald-800"
+                                >
                                     PB-03
                                 </td>
 
-                                <td class="py-3 px-4 font-semibold text-slate-900">
+                                <td
+                                    class="py-3 px-4 font-semibold text-slate-900"
+                                >
                                     Denúncia Cívica
                                 </td>
 
                                 <td class="py-3 px-4 text-slate-600">
-                                    Módulo de denúncia de lixo irregular com envio
-                                    de fotos, tipo de resíduo e endereço em Manaus.
+                                    Módulo de denúncia de lixo irregular com
+                                    envio de fotos, tipo de resíduo e endereço
+                                    em Manaus.
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded bg-red-100 text-red-700 font-bold">
+                                    <span
+                                        class="px-2 py-0.5 rounded bg-red-100 text-red-700 font-bold"
+                                    >
                                         ALTA
                                     </span>
                                 </td>
 
-                                <td class="py-3 px-4 font-bold text-slate-800">
+                                <td
+                                    class="py-3 px-4 font-bold text-slate-800"
+                                >
                                     8 SP
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded bg-orange-100 text-orange-800 font-semibold">
+                                    <span
+                                        class="px-2 py-0.5 rounded bg-orange-100 text-orange-800 font-semibold"
+                                    >
                                         Sprint 1
                                     </span>
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-bold">
+                                    <span
+                                        class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-bold"
+                                    >
                                         ⏳ Em Validação
                                     </span>
                                 </td>
@@ -600,39 +902,54 @@
 
                             <!-- PB-04 -->
 
-                            <tr class="hover:bg-slate-50/80 transition-colors">
+                            <tr
+                                class="hover:bg-slate-50/80 transition-colors"
+                            >
 
-                                <td class="py-3 px-4 font-bold text-emerald-800">
+                                <td
+                                    class="py-3 px-4 font-bold text-emerald-800"
+                                >
                                     PB-04
                                 </td>
 
-                                <td class="py-3 px-4 font-semibold text-slate-900">
+                                <td
+                                    class="py-3 px-4 font-semibold text-slate-900"
+                                >
                                     Geolocalização
                                 </td>
 
                                 <td class="py-3 px-4 text-slate-600">
-                                    Mapa interativo com ecopontos e rotas de coleta
-                                    seletiva nas Zonas Norte, Sul, Leste e Oeste.
+                                    Mapa interativo com ecopontos e rotas de
+                                    coleta seletiva nas Zonas Norte, Sul,
+                                    Leste e Oeste.
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold">
+                                    <span
+                                        class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold"
+                                    >
                                         MÉDIA
                                     </span>
                                 </td>
 
-                                <td class="py-3 px-4 font-bold text-slate-800">
+                                <td
+                                    class="py-3 px-4 font-bold text-slate-800"
+                                >
                                     8 SP
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-semibold">
+                                    <span
+                                        class="px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-semibold"
+                                    >
                                         Sprint 2
                                     </span>
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-bold">
+                                    <span
+                                        class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-bold"
+                                    >
                                         📅 Planejada
                                     </span>
                                 </td>
@@ -642,40 +959,54 @@
 
                             <!-- PB-05 -->
 
-                            <tr class="hover:bg-slate-50/80 transition-colors">
+                            <tr
+                                class="hover:bg-slate-50/80 transition-colors bg-emerald-50/60"
+                            >
 
-                                <td class="py-3 px-4 font-bold text-emerald-800">
+                                <td
+                                    class="py-3 px-4 font-bold text-emerald-800"
+                                >
                                     PB-05
                                 </td>
 
-                                <td class="py-3 px-4 font-semibold text-slate-900">
+                                <td
+                                    class="py-3 px-4 font-semibold text-slate-900"
+                                >
                                     Atendimento Virtual
                                 </td>
 
                                 <td class="py-3 px-4 text-slate-600">
-                                    Chatbot para tirar dúvidas imediatas sobre
-                                    reciclagem e dias de coleta por bairro.
+                                    Chatbot inteligente para tirar dúvidas
+                                    sobre descarte, ecopontos e ODS 11.
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-bold">
-                                        BAIXA
+                                    <span
+                                        class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold"
+                                    >
+                                        IMPLEMENTADO
                                     </span>
                                 </td>
 
-                                <td class="py-3 px-4 font-bold text-slate-800">
+                                <td
+                                    class="py-3 px-4 font-bold text-slate-800"
+                                >
                                     5 SP
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-semibold">
-                                        Sprint 3
+                                    <span
+                                        class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-semibold"
+                                    >
+                                        Sprint 1
                                     </span>
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-bold">
-                                        📋 Backlog
+                                    <span
+                                        class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold"
+                                    >
+                                        ✔ Operacional
                                     </span>
                                 </td>
 
@@ -684,39 +1015,54 @@
 
                             <!-- PB-06 -->
 
-                            <tr class="hover:bg-slate-50/80 transition-colors">
+                            <tr
+                                class="hover:bg-slate-50/80 transition-colors"
+                            >
 
-                                <td class="py-3 px-4 font-bold text-emerald-800">
+                                <td
+                                    class="py-3 px-4 font-bold text-emerald-800"
+                                >
                                     PB-06
                                 </td>
 
-                                <td class="py-3 px-4 font-semibold text-slate-900">
+                                <td
+                                    class="py-3 px-4 font-semibold text-slate-900"
+                                >
                                     Educação Cívica
                                 </td>
 
                                 <td class="py-3 px-4 text-slate-600">
-                                    Guia ilustrado de descarte ecológico adaptado
-                                    à realidade manauara (igarapés e cheias).
+                                    Guia ilustrado de descarte ecológico
+                                    adaptado à realidade manauara
+                                    (igarapés e cheias).
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold">
+                                    <span
+                                        class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold"
+                                    >
                                         MÉDIA
                                     </span>
                                 </td>
 
-                                <td class="py-3 px-4 font-bold text-slate-800">
+                                <td
+                                    class="py-3 px-4 font-bold text-slate-800"
+                                >
                                     3 SP
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-semibold">
+                                    <span
+                                        class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-semibold"
+                                    >
                                         Sprint 3
                                     </span>
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-bold">
+                                    <span
+                                        class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-bold"
+                                    >
                                         📋 Backlog
                                     </span>
                                 </td>
@@ -726,13 +1072,19 @@
 
                             <!-- PB-07 -->
 
-                            <tr class="hover:bg-slate-50/80 transition-colors">
+                            <tr
+                                class="hover:bg-slate-50/80 transition-colors"
+                            >
 
-                                <td class="py-3 px-4 font-bold text-emerald-800">
+                                <td
+                                    class="py-3 px-4 font-bold text-emerald-800"
+                                >
                                     PB-07
                                 </td>
 
-                                <td class="py-3 px-4 font-semibold text-slate-900">
+                                <td
+                                    class="py-3 px-4 font-semibold text-slate-900"
+                                >
                                     Engajamento Social
                                 </td>
 
@@ -742,23 +1094,31 @@
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold">
+                                    <span
+                                        class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold"
+                                    >
                                         MÉDIA
                                     </span>
                                 </td>
 
-                                <td class="py-3 px-4 font-bold text-slate-800">
+                                <td
+                                    class="py-3 px-4 font-bold text-slate-800"
+                                >
                                     5 SP
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-semibold">
+                                    <span
+                                        class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-semibold"
+                                    >
                                         Sprint 3
                                     </span>
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-bold">
+                                    <span
+                                        class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-bold"
+                                    >
                                         📋 Backlog
                                     </span>
                                 </td>
@@ -768,39 +1128,53 @@
 
                             <!-- PB-08 -->
 
-                            <tr class="hover:bg-slate-50/80 transition-colors bg-amber-50/40">
+                            <tr
+                                class="hover:bg-slate-50/80 transition-colors bg-amber-50/40"
+                            >
 
-                                <td class="py-3 px-4 font-bold text-emerald-800">
+                                <td
+                                    class="py-3 px-4 font-bold text-emerald-800"
+                                >
                                     PB-08
                                 </td>
 
-                                <td class="py-3 px-4 font-semibold text-slate-900">
+                                <td
+                                    class="py-3 px-4 font-semibold text-slate-900"
+                                >
                                     Banco de Dados
                                 </td>
 
                                 <td class="py-3 px-4 text-slate-600">
-                                    Diagrama Relacional e esquema SQL
-                                    (tabelas usuarios, denuncias, ecopontos).
+                                    Diagrama Relacional e esquema SQL (tabelas
+                                    usuarios, denuncias, ecopontos).
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded bg-red-100 text-red-700 font-bold">
+                                    <span
+                                        class="px-2 py-0.5 rounded bg-red-100 text-red-700 font-bold"
+                                    >
                                         ALTA
                                     </span>
                                 </td>
 
-                                <td class="py-3 px-4 font-bold text-slate-800">
+                                <td
+                                    class="py-3 px-4 font-bold text-slate-800"
+                                >
                                     5 SP
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded bg-orange-100 text-orange-800 font-semibold">
+                                    <span
+                                        class="px-2 py-0.5 rounded bg-orange-100 text-orange-800 font-semibold"
+                                    >
                                         Sprint 1
                                     </span>
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 font-bold">
+                                    <span
+                                        class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 font-bold"
+                                    >
                                         ⚙️ Em Andamento
                                     </span>
                                 </td>
@@ -810,39 +1184,53 @@
 
                             <!-- PB-09 -->
 
-                            <tr class="hover:bg-slate-50/80 transition-colors">
+                            <tr
+                                class="hover:bg-slate-50/80 transition-colors"
+                            >
 
-                                <td class="py-3 px-4 font-bold text-emerald-800">
+                                <td
+                                    class="py-3 px-4 font-bold text-emerald-800"
+                                >
                                     PB-09
                                 </td>
 
-                                <td class="py-3 px-4 font-semibold text-slate-900">
+                                <td
+                                    class="py-3 px-4 font-semibold text-slate-900"
+                                >
                                     Backend & API
                                 </td>
 
                                 <td class="py-3 px-4 text-slate-600">
-                                    API em Python para receber e salvar registros
-                                    de denúncias da população.
+                                    API em Python para receber e salvar
+                                    registros de denúncias da população.
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded bg-red-100 text-red-700 font-bold">
+                                    <span
+                                        class="px-2 py-0.5 rounded bg-red-100 text-red-700 font-bold"
+                                    >
                                         ALTA
                                     </span>
                                 </td>
 
-                                <td class="py-3 px-4 font-bold text-slate-800">
+                                <td
+                                    class="py-3 px-4 font-bold text-slate-800"
+                                >
                                     8 SP
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-semibold">
+                                    <span
+                                        class="px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-semibold"
+                                    >
                                         Sprint 2
                                     </span>
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-bold">
+                                    <span
+                                        class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-bold"
+                                    >
                                         📅 Planejada
                                     </span>
                                 </td>
@@ -852,39 +1240,53 @@
 
                             <!-- PB-10 -->
 
-                            <tr class="hover:bg-slate-50/80 transition-colors">
+                            <tr
+                                class="hover:bg-slate-50/80 transition-colors"
+                            >
 
-                                <td class="py-3 px-4 font-bold text-emerald-800">
+                                <td
+                                    class="py-3 px-4 font-bold text-emerald-800"
+                                >
                                     PB-10
                                 </td>
 
-                                <td class="py-3 px-4 font-semibold text-slate-900">
+                                <td
+                                    class="py-3 px-4 font-semibold text-slate-900"
+                                >
                                     Qualidade & Artigo
                                 </td>
 
                                 <td class="py-3 px-4 text-slate-600">
-                                    Testes com moradores da comunidade local
-                                    e escrita do Artigo Extensionista.
+                                    Testes com moradores da comunidade local e
+                                    escrita do Artigo Extensionista.
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold">
+                                    <span
+                                        class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold"
+                                    >
                                         MÉDIA
                                     </span>
                                 </td>
 
-                                <td class="py-3 px-4 font-bold text-slate-800">
+                                <td
+                                    class="py-3 px-4 font-bold text-slate-800"
+                                >
                                     5 SP
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-semibold">
+                                    <span
+                                        class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-semibold"
+                                    >
                                         Sprint 3
                                     </span>
                                 </td>
 
                                 <td class="py-3 px-4">
-                                    <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-bold">
+                                    <span
+                                        class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-bold"
+                                    >
                                         📋 Backlog
                                     </span>
                                 </td>
@@ -892,13 +1294,10 @@
                             </tr>
 
                         </tbody>
-
                     </table>
 
                 </div>
-
             </div>
-
         </section>
 
 
@@ -908,11 +1307,15 @@
 
         <section id="sprints" class="space-y-4">
 
-            <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+            <div
+                class="flex items-center justify-between border-b border-slate-200 pb-3"
+            >
 
                 <div>
 
-                    <span class="text-xs uppercase font-extrabold text-brand-700 tracking-wider">
+                    <span
+                        class="text-xs uppercase font-extrabold text-brand-700 tracking-wider"
+                    >
                         Ciclos de Entrega Contínua
                     </span>
 
@@ -922,7 +1325,9 @@
 
                 </div>
 
-                <span class="text-xs text-slate-500 font-semibold">
+                <span
+                    class="text-xs text-slate-500 font-semibold"
+                >
                     Timebox: 2 Semanas por Sprint
                 </span>
 
@@ -931,83 +1336,96 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
+                <!-- SPRINT 1 -->
 
-                <!-- ================= SPRINT 1 ================= -->
-
-                <div class="bg-white border-2 border-orange-200 rounded-2xl p-5 shadow-sm space-y-4 flex flex-col justify-between">
+                <div
+                    class="bg-white border-2 border-orange-200 rounded-2xl p-5 shadow-sm space-y-4 flex flex-col justify-between"
+                >
 
                     <div>
 
-                        <div class="flex items-center justify-between mb-3">
-
-                            <span class="px-2.5 py-1 rounded-lg bg-orange-500 text-white font-bold text-xs uppercase tracking-wider">
+                        <div
+                            class="flex items-center justify-between mb-3"
+                        >
+                            <span
+                                class="px-2.5 py-1 rounded-lg bg-orange-500 text-white font-bold text-xs uppercase tracking-wider"
+                            >
                                 Sprint 1
                             </span>
 
-                            <span class="px-2 py-0.5 rounded-full bg-orange-100 text-orange-800 text-xs font-bold">
+                            <span
+                                class="px-2 py-0.5 rounded-full bg-orange-100 text-orange-800 text-xs font-bold"
+                            >
                                 Em Andamento
                             </span>
-
                         </div>
 
-                        <h3 class="font-bold text-base text-slate-900 mb-1">
+                        <h3
+                            class="font-bold text-base text-slate-900 mb-1"
+                        >
                             Base da Apresentação & MVP
                         </h3>
 
                         <p class="text-xs text-slate-500 mb-4">
-                            Estrutura inicial do portal Cidade Limpa e módulo
-                            funcional de denúncia com upload.
+                            Estrutura inicial do portal Cidade Limpa, denúncia
+                            de lixo e chatbot interativo.
                         </p>
-
-
-                        <!-- Progresso -->
 
                         <div class="mb-3">
 
-                            <div class="flex justify-between text-xs font-bold text-slate-700 mb-1">
-
-                                <span>
-                                    Progresso das Tarefas
-                                </span>
-
-                                <span class="text-orange-600">
-                                    78%
-                                </span>
-
+                            <div
+                                class="flex justify-between text-xs font-bold text-slate-700 mb-1"
+                            >
+                                <span>Progresso das Tarefas</span>
+                                <span class="text-orange-600">85%</span>
                             </div>
 
-                            <div class="w-full bg-slate-100 rounded-full h-2">
-
+                            <div
+                                class="w-full bg-slate-100 rounded-full h-2"
+                            >
                                 <div
                                     class="bg-orange-500 h-2 rounded-full"
-                                    style="width: 78%"
+                                    style="width: 85%"
                                 ></div>
-
                             </div>
 
                         </div>
 
-
                         <ul class="text-xs space-y-2 text-slate-600">
 
                             <li class="flex items-start gap-2">
-                                <span class="text-emerald-600 font-bold">☑</span>
-                                Criação do layout inicial (HTML5/Tailwind)
+                                <span class="text-emerald-600 font-bold">
+                                    ☑
+                                </span>
+                                Layout inicial responsivo (HTML5/Tailwind)
                             </li>
 
                             <li class="flex items-start gap-2">
-                                <span class="text-emerald-600 font-bold">☑</span>
-                                Menu responsivo e rodapé institucional
+                                <span class="text-emerald-600 font-bold">
+                                    ☑
+                                </span>
+                                Menu de navegação e rodapé institucional
                             </li>
 
                             <li class="flex items-start gap-2">
-                                <span class="text-emerald-600 font-bold">☑</span>
+                                <span class="text-emerald-600 font-bold">
+                                    ☑
+                                </span>
                                 Seção temática e alinhamento ODS 11
                             </li>
 
                             <li class="flex items-start gap-2">
-                                <span class="text-emerald-600 font-bold">☑</span>
-                                Formulário interativo de denúncia de resíduos
+                                <span class="text-emerald-600 font-bold">
+                                    ☑
+                                </span>
+                                Chatbot Assistente Virtual de dúvidas
+                            </li>
+
+                            <li class="flex items-start gap-2">
+                                <span class="text-emerald-600 font-bold">
+                                    ☑
+                                </span>
+                                Formulário de denúncia com campos dinâmicos
                             </li>
 
                             <li class="flex items-start gap-2">
@@ -1017,48 +1435,53 @@
 
                             <li class="flex items-start gap-2">
                                 <span class="text-slate-400">☐</span>
-                                Validação de usabilidade com a turma
+                                Validação de usabilidade com a turma de ADS
                             </li>
 
                         </ul>
-
                     </div>
 
-
-                    <div class="pt-3 border-t border-slate-100 flex justify-between items-center text-xs font-semibold text-slate-500">
-
-                        <span>
-                            Goal: MVP Denúncia
-                        </span>
-
+                    <div
+                        class="pt-3 border-t border-slate-100 flex justify-between items-center text-xs font-semibold text-slate-500"
+                    >
+                        <span>Goal: MVP & Chatbot</span>
                         <span class="text-orange-600">
                             Entrega: 14 dias
                         </span>
-
                     </div>
 
                 </div>
 
 
-                <!-- ================= SPRINT 2 ================= -->
+                <!-- SPRINT 2 -->
 
-                <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4 flex flex-col justify-between">
+                <div
+                    class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4 flex flex-col justify-between"
+                >
 
                     <div>
 
-                        <div class="flex items-center justify-between mb-3">
+                        <div
+                            class="flex items-center justify-between mb-3"
+                        >
 
-                            <span class="px-2.5 py-1 rounded-lg bg-blue-600 text-white font-bold text-xs uppercase tracking-wider">
+                            <span
+                                class="px-2.5 py-1 rounded-lg bg-blue-600 text-white font-bold text-xs uppercase tracking-wider"
+                            >
                                 Sprint 2
                             </span>
 
-                            <span class="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 text-xs font-bold">
+                            <span
+                                class="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 text-xs font-bold"
+                            >
                                 Planejada
                             </span>
 
                         </div>
 
-                        <h3 class="font-bold text-base text-slate-900 mb-1">
+                        <h3
+                            class="font-bold text-base text-slate-900 mb-1"
+                        >
                             Georreferenciamento & API
                         </h3>
 
@@ -1067,43 +1490,37 @@
                             e ecopontos em Manaus.
                         </p>
 
-
                         <div class="mb-3">
 
-                            <div class="flex justify-between text-xs font-bold text-slate-700 mb-1">
-
-                                <span>
-                                    Progresso das Tarefas
-                                </span>
-
-                                <span class="text-slate-500">
-                                    0%
-                                </span>
-
+                            <div
+                                class="flex justify-between text-xs font-bold text-slate-700 mb-1"
+                            >
+                                <span>Progresso das Tarefas</span>
+                                <span class="text-slate-500">0%</span>
                             </div>
 
-                            <div class="w-full bg-slate-100 rounded-full h-2">
-
+                            <div
+                                class="w-full bg-slate-100 rounded-full h-2"
+                            >
                                 <div
                                     class="bg-blue-600 h-2 rounded-full"
                                     style="width: 0%"
                                 ></div>
-
                             </div>
 
                         </div>
-
 
                         <ul class="text-xs space-y-2 text-slate-600">
 
                             <li class="flex items-start gap-2">
                                 <span class="text-slate-400">☐</span>
-                                Integração de mapa interativo (OpenStreetMap)
+                                Integração de mapa interativo (Leaflet)
                             </li>
 
                             <li class="flex items-start gap-2">
                                 <span class="text-slate-400">☐</span>
-                                Cadastro de PEVs por zona (Norte, Sul, Leste, Oeste)
+                                Cadastro de PEVs por zona (Norte, Sul, Leste,
+                                Oeste)
                             </li>
 
                             <li class="flex items-start gap-2">
@@ -1120,86 +1537,85 @@
 
                     </div>
 
-
-                    <div class="pt-3 border-t border-slate-100 flex justify-between items-center text-xs font-semibold text-slate-500">
-
-                        <span>
-                            Goal: Mapa Ecopontos
-                        </span>
-
+                    <div
+                        class="pt-3 border-t border-slate-100 flex justify-between items-center text-xs font-semibold text-slate-500"
+                    >
+                        <span>Goal: Mapa Ecopontos</span>
                         <span class="text-blue-600">
                             Próximo Ciclo
                         </span>
-
                     </div>
 
                 </div>
 
 
-                <!-- ================= SPRINT 3 ================= -->
+                <!-- SPRINT 3 -->
 
-                <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4 flex flex-col justify-between">
+                <div
+                    class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4 flex flex-col justify-between"
+                >
 
                     <div>
 
-                        <div class="flex items-center justify-between mb-3">
+                        <div
+                            class="flex items-center justify-between mb-3"
+                        >
 
-                            <span class="px-2.5 py-1 rounded-lg bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider">
+                            <span
+                                class="px-2.5 py-1 rounded-lg bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider"
+                            >
                                 Sprint 3
                             </span>
 
-                            <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold">
+                            <span
+                                class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold"
+                            >
                                 Futura
                             </span>
 
                         </div>
 
-                        <h3 class="font-bold text-base text-slate-900 mb-1">
+                        <h3
+                            class="font-bold text-base text-slate-900 mb-1"
+                        >
                             Comunidade & Artigo Final
                         </h3>
 
                         <p class="text-xs text-slate-500 mb-4">
-                            Educação ambiental, chatbot interativo e consolidação
-                            do artigo científico do 2º período.
+                            Educação ambiental e consolidação do artigo
+                            científico do 2º período.
                         </p>
-
 
                         <div class="mb-3">
 
-                            <div class="flex justify-between text-xs font-bold text-slate-700 mb-1">
-
-                                <span>
-                                    Progresso das Tarefas
-                                </span>
-
-                                <span class="text-slate-500">
-                                    0%
-                                </span>
-
+                            <div
+                                class="flex justify-between text-xs font-bold text-slate-700 mb-1"
+                            >
+                                <span>Progresso das Tarefas</span>
+                                <span class="text-slate-500">0%</span>
                             </div>
 
-                            <div class="w-full bg-slate-100 rounded-full h-2">
-
+                            <div
+                                class="w-full bg-slate-100 rounded-full h-2"
+                            >
                                 <div
                                     class="bg-emerald-600 h-2 rounded-full"
                                     style="width: 0%"
                                 ></div>
-
                             </div>
 
                         </div>
-
 
                         <ul class="text-xs space-y-2 text-slate-600">
 
                             <li class="flex items-start gap-2">
                                 <span class="text-slate-400">☐</span>
-                                Módulo de cartilhas digitais e descarte consciente
+                                Cartilhas digitais e descarte consciente
                             </li>
 
                             <li class="flex items-start gap-2">
                                 <span class="text-slate-400">☐</span>
-                                Chatbot de assistência e tira-dúvidas automatizado
+                                Expansão de canais do Chatbot para WhatsApp
                             </li>
 
                             <li class="flex items-start gap-2">
@@ -1216,23 +1632,18 @@
 
                     </div>
 
-
-                    <div class="pt-3 border-t border-slate-100 flex justify-between items-center text-xs font-semibold text-slate-500">
-
-                        <span>
-                            Goal: Fechamento & Artigo
-                        </span>
-
+                    <div
+                        class="pt-3 border-t border-slate-100 flex justify-between items-center text-xs font-semibold text-slate-500"
+                    >
+                        <span>Goal: Fechamento & Artigo</span>
                         <span class="text-emerald-700">
                             Fase Final
                         </span>
-
                     </div>
 
                 </div>
 
             </div>
-
         </section>
 
 
@@ -1240,13 +1651,17 @@
              FORMULÁRIO DE DENÚNCIA
         ====================================================== -->
 
-        <section class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+        <section
+            class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm"
+        >
 
             <div class="max-w-2xl mx-auto space-y-6">
 
                 <div class="text-center space-y-1">
 
-                    <span class="text-xs uppercase font-extrabold text-orange-600 tracking-wider">
+                    <span
+                        class="text-xs uppercase font-extrabold text-orange-600 tracking-wider"
+                    >
                         Entregável da Sprint 1 • Em Validação
                     </span>
 
@@ -1255,25 +1670,25 @@
                     </h2>
 
                     <p class="text-xs text-slate-500">
-                        Ajude a combater as lixeiras viciadas e proteger
-                        as bacias dos igarapés de Manaus.
+                        Ajude a combater as lixeiras viciadas e proteger as
+                        bacias dos igarapés de Manaus.
                     </p>
 
                 </div>
 
-
                 <form
                     id="form-denuncia"
                     class="space-y-4"
+                    onsubmit="event.preventDefault(); alert('Denúncia registrada com sucesso no protótipo acadêmico! Na Sprint 2 será conectada ao banco MySQL.');"
                 >
-
-                    <!-- Localização -->
 
                     <div>
 
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">
-                            Localização em Manaus
-                            (Bairro, Rua ou Ponto de Referência)
+                        <label
+                            class="block text-xs font-bold text-slate-700 uppercase mb-1"
+                        >
+                            Localização em Manaus (Bairro, Rua ou Ponto de
+                            Referência)
                         </label>
 
                         <input
@@ -1286,20 +1701,19 @@
                     </div>
 
 
-                    <!-- Tipo de resíduo e zona -->
-
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
                         <div>
 
-                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">
+                            <label
+                                class="block text-xs font-bold text-slate-700 uppercase mb-1"
+                            >
                                 Tipo de Resíduo Predominante
                             </label>
 
                             <select
                                 class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-600"
                             >
-
                                 <option>
                                     Entulho de construção civil / terra
                                 </option>
@@ -1315,7 +1729,6 @@
                                 <option>
                                     Descarte em margem de igarapé
                                 </option>
-
                             </select>
 
                         </div>
@@ -1323,21 +1736,21 @@
 
                         <div>
 
-                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">
+                            <label
+                                class="block text-xs font-bold text-slate-700 uppercase mb-1"
+                            >
                                 Zona da Cidade
                             </label>
 
                             <select
                                 class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-600"
                             >
-
                                 <option>Zona Centro-Sul</option>
                                 <option>Zona Norte</option>
                                 <option>Zona Leste</option>
                                 <option>Zona Oeste</option>
                                 <option>Zona Sul</option>
                                 <option>Zona Centro-Oeste</option>
-
                             </select>
 
                         </div>
@@ -1345,11 +1758,11 @@
                     </div>
 
 
-                    <!-- Descrição -->
-
                     <div>
 
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">
+                        <label
+                            class="block text-xs font-bold text-slate-700 uppercase mb-1"
+                        >
                             Descrição do Problema
                         </label>
 
@@ -1362,25 +1775,20 @@
                     </div>
 
 
-                    <!-- Botão -->
-
                     <button
                         type="submit"
                         class="w-full py-3 px-6 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2"
                     >
-
                         <span class="material-symbols-outlined text-lg">
                             send
                         </span>
 
                         Enviar Denúncia para o Sistema
-
                     </button>
 
                 </form>
 
             </div>
-
         </section>
 
 
@@ -1393,69 +1801,83 @@
             class="bg-gradient-to-r from-orange-500 to-amber-600 rounded-3xl p-8 sm:p-10 text-white shadow-lg"
         >
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+            <div
+                class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center"
+            >
 
                 <div class="space-y-2">
 
-                    <span class="px-3 py-1 rounded-full bg-white/20 text-xs font-bold uppercase tracking-wider">
+                    <span
+                        class="px-3 py-1 rounded-full bg-white/20 text-xs font-bold uppercase tracking-wider"
+                    >
                         Compromisso ONU 2030
                     </span>
 
-                    <h2 class="text-3xl font-extrabold leading-tight">
+                    <h2
+                        class="text-3xl font-extrabold leading-tight"
+                    >
                         ODS 11 — Cidades e Comunidades Sustentáveis
                     </h2>
 
                     <p class="text-amber-100 text-xs">
-                        Meta 11.6: Reduzir o impacto ambiental negativo per capita
-                        das cidades, inclusive prestando especial atenção à qualidade
-                        do ar e gestão de resíduos sólidos municipais até 2030.
+                        Meta 11.6: Reduzir o impacto ambiental negativo per
+                        capita das cidades, inclusive prestando especial
+                        atenção à qualidade do ar e gestão de resíduos sólidos
+                        municipais até 2030.
                     </p>
 
                 </div>
 
 
-                <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4 text-slate-800">
+                <div
+                    class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4 text-slate-800"
+                >
 
+                    <div
+                        class="p-4 rounded-2xl bg-white/95 shadow-sm space-y-1"
+                    >
 
-                    <!-- Igarapés -->
-
-                    <div class="p-4 rounded-2xl bg-white/95 shadow-sm space-y-1">
-
-                        <div class="font-bold text-sm text-slate-900 flex items-center gap-1.5">
-
-                            <span class="material-symbols-outlined text-emerald-600">
+                        <div
+                            class="font-bold text-sm text-slate-900 flex items-center gap-1.5"
+                        >
+                            <span
+                                class="material-symbols-outlined text-emerald-600"
+                            >
                                 water
                             </span>
 
                             Preservação dos Igarapés
-
                         </div>
 
                         <p class="text-xs text-slate-600">
                             Combate ao entupimento das calhas e leitos fluviais
-                            de Manaus provocado pelo descarte de plástico e entulho.
+                            de Manaus provocado pelo descarte de plástico e
+                            entulho.
                         </p>
 
                     </div>
 
 
-                    <!-- Ecopontos -->
+                    <div
+                        class="p-4 rounded-2xl bg-white/95 shadow-sm space-y-1"
+                    >
 
-                    <div class="p-4 rounded-2xl bg-white/95 shadow-sm space-y-1">
-
-                        <div class="font-bold text-sm text-slate-900 flex items-center gap-1.5">
-
-                            <span class="material-symbols-outlined text-emerald-600">
+                        <div
+                            class="font-bold text-sm text-slate-900 flex items-center gap-1.5"
+                        >
+                            <span
+                                class="material-symbols-outlined text-emerald-600"
+                            >
                                 recycling
                             </span>
 
                             Coleta & Ecopontos
-
                         </div>
 
                         <p class="text-xs text-slate-600">
-                            Facilitação de pontos de descarte voluntário e incentivo
-                            à triagem de recicláveis com cooperativas de catadores.
+                            Facilitação de pontos de descarte voluntário e
+                            incentivo à triagem de recicláveis com cooperativas
+                            de catadores.
                         </p>
 
                     </div>
@@ -1463,7 +1885,6 @@
                 </div>
 
             </div>
-
         </section>
 
 
@@ -1475,7 +1896,9 @@
 
             <div class="border-b border-slate-200 pb-3">
 
-                <span class="text-xs uppercase font-extrabold text-brand-700 tracking-wider">
+                <span
+                    class="text-xs uppercase font-extrabold text-brand-700 tracking-wider"
+                >
                     Engenharia de Software
                 </span>
 
@@ -1486,48 +1909,59 @@
             </div>
 
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm">
+            <div
+                class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm"
+            >
 
+                <!-- FRONTEND -->
 
-                <!-- Frontend -->
+                <div
+                    class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2"
+                >
 
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2">
-
-                    <div class="font-bold text-slate-900 flex items-center gap-2">
-
-                        <span class="material-symbols-outlined text-brand-700">
+                    <div
+                        class="font-bold text-slate-900 flex items-center gap-2"
+                    >
+                        <span
+                            class="material-symbols-outlined text-brand-700"
+                        >
                             devices
                         </span>
 
                         Frontend Dinâmico
-
                     </div>
 
                     <p class="text-xs text-slate-600">
                         Interface responsiva, sem dependências pesadas,
-                        projetada para rápido carregamento até em redes
-                        3G periféricas.
+                        projetada para rápido carregamento até em redes 3G
+                        periféricas.
                     </p>
 
-                    <div class="text-xs font-semibold text-slate-500 pt-2 border-t border-slate-100">
+                    <div
+                        class="text-xs font-semibold text-slate-500 pt-2 border-t border-slate-100"
+                    >
                         HTML5 Semântico • CSS3 Grid/Flex • Vanilla JS
                     </div>
 
                 </div>
 
 
-                <!-- Backend -->
+                <!-- BACKEND -->
 
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+                <div
+                    class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2"
+                >
 
-                    <div class="font-bold text-slate-900 flex items-center gap-2">
-
-                        <span class="material-symbols-outlined text-brand-700">
+                    <div
+                        class="font-bold text-slate-900 flex items-center gap-2"
+                    >
+                        <span
+                            class="material-symbols-outlined text-brand-700"
+                        >
                             terminal
                         </span>
 
                         Backend & API
-
                     </div>
 
                     <p class="text-xs text-slate-600">
@@ -1535,40 +1969,47 @@
                         geolocalização e regras de negócio da denúncia.
                     </p>
 
-                    <div class="text-xs font-semibold text-slate-500 pt-2 border-t border-slate-100">
+                    <div
+                        class="text-xs font-semibold text-slate-500 pt-2 border-t border-slate-100"
+                    >
                         Python 3.11 • Flask REST API • PyMySQL
                     </div>
 
                 </div>
 
 
-                <!-- Banco de dados -->
+                <!-- BANCO -->
 
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+                <div
+                    class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2"
+                >
 
-                    <div class="font-bold text-slate-900 flex items-center gap-2">
-
-                        <span class="material-symbols-outlined text-brand-700">
+                    <div
+                        class="font-bold text-slate-900 flex items-center gap-2"
+                    >
+                        <span
+                            class="material-symbols-outlined text-brand-700"
+                        >
                             database
                         </span>
 
                         Banco Relacional
-
                     </div>
 
                     <p class="text-xs text-slate-600">
-                        Armazenamento estruturado de denúncias, ecopontos
-                        e registros de voluntários com integridade referencial.
+                        Armazenamento estruturado de denúncias, ecopontos e
+                        registros de voluntários com integridade referencial.
                     </p>
 
-                    <div class="text-xs font-semibold text-slate-500 pt-2 border-t border-slate-100">
+                    <div
+                        class="text-xs font-semibold text-slate-500 pt-2 border-t border-slate-100"
+                    >
                         MySQL 8.0 • 3 Entidades Relacionais
                     </div>
 
                 </div>
 
             </div>
-
         </section>
 
     </main>
@@ -1578,9 +2019,13 @@
          RODAPÉ
     ========================================================== -->
 
-    <footer class="bg-slate-900 text-slate-400 text-xs py-8 border-t border-slate-800 mt-12">
+    <footer
+        class="bg-slate-900 text-slate-400 text-xs py-8 border-t border-slate-800 mt-12 mb-20 sm:mb-0"
+    >
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left"
+        >
 
             <div>
 
@@ -1595,32 +2040,799 @@
 
             </div>
 
-
             <div class="flex items-center gap-4">
 
-                <span>
-                    ODS 11 — Meta 11.6
-                </span>
-
-                <span>
-                    •
-                </span>
-
-                <span>
-                    Metodologia Ágil (Scrum)
-                </span>
+                <span>ODS 11 — Meta 11.6</span>
+                <span>•</span>
+                <span>Metodologia Ágil (Scrum)</span>
 
             </div>
 
         </div>
-
     </footer>
 
 
-    <!-- JavaScript -->
-    <script src="js/script.js"></script>
+    <!-- =========================================================
+         CHATBOT FLUTUANTE
+    ========================================================== -->
+
+    <div
+        class="fixed bottom-6 right-6 z-50 flex flex-col items-end"
+    >
+
+        <!-- JANELA DO CHAT -->
+
+        <div
+            id="chat-window"
+            class="hidden w-[92vw] sm:w-[400px] h-[540px] bg-white rounded-3xl shadow-2xl border border-slate-200 flex-col overflow-hidden mb-3 transition-all duration-300 transform origin-bottom-right"
+        >
+
+            <!-- HEADER DO CHAT -->
+
+            <div
+                class="bg-gradient-to-r from-emerald-800 to-brand-700 text-white p-4 flex items-center justify-between"
+            >
+
+                <div class="flex items-center gap-3">
+
+                    <div class="relative">
+
+                        <div
+                            class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white font-bold text-lg shadow-inner"
+                        >
+                            <span
+                                class="material-symbols-outlined text-2xl text-emerald-200"
+                            >
+                                psychology_alt
+                            </span>
+                        </div>
+
+                        <span
+                            class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 border-2 border-emerald-900 rounded-full"
+                        ></span>
+
+                    </div>
+
+
+                    <div>
+
+                        <h3
+                            class="font-bold text-sm text-white tracking-tight flex items-center gap-1.5"
+                        >
+                            Curumim Verde
+
+                            <span
+                                class="text-[10px] px-1.5 py-0.2 rounded bg-white/20 text-emerald-100 font-semibold"
+                            >
+                                IA Manaus
+                            </span>
+                        </h3>
+
+                        <p
+                            class="text-[11px] text-emerald-200 font-medium flex items-center gap-1"
+                        >
+                            <span
+                                class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse"
+                            ></span>
+
+                            Assistente Cívico • ODS 11
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    onclick="toggleChat()"
+                    class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+                    title="Fechar Chat"
+                >
+                    <span class="material-symbols-outlined text-lg">
+                        close
+                    </span>
+                </button>
+
+            </div>
+
+
+            <!-- MENSAGENS -->
+
+            <div
+                id="chat-messages"
+                class="flex-grow p-4 overflow-y-auto space-y-3 bg-slate-50 text-xs"
+            >
+
+                <!-- BOAS-VINDAS -->
+
+                <div class="flex items-start gap-2">
+
+                    <div
+                        class="w-7 h-7 rounded-full bg-brand-700 text-white flex items-center justify-center flex-shrink-0 text-xs"
+                    >
+                        <span class="material-symbols-outlined text-sm">
+                            eco
+                        </span>
+                    </div>
+
+                    <div
+                        class="bg-white border border-slate-200 text-slate-800 rounded-2xl rounded-tl-none p-3.5 shadow-sm max-w-[85%] space-y-2"
+                    >
+
+                        <p
+                            class="font-semibold text-slate-900 text-xs"
+                        >
+                            Olá, manauara! Sou o
+                            <span class="text-emerald-700 font-bold">
+                                Curumim Verde
+                            </span>,
+                            o assistente inteligente do
+                            <strong>Cidade Limpa</strong>! 🌿
+                        </p>
+
+                        <p
+                            class="text-slate-600 leading-relaxed"
+                        >
+                            Tire suas dúvidas sobre
+                            <strong>onde descartar lixo em Manaus</strong>,
+                            denúncias de lixeiras viciadas, igarapés e nosso
+                            compromisso com a <strong>ODS 11</strong>.
+                        </p>
+
+                    </div>
+                </div>
+
+
+                <!-- PERGUNTAS RÁPIDAS -->
+
+                <div
+                    class="pl-9 space-y-1.5"
+                    id="quick-replies-container"
+                >
+
+                    <p
+                        class="text-[10px] font-bold uppercase text-slate-500 tracking-wider"
+                    >
+                        Perguntas Frequentes:
+                    </p>
+
+
+                    <button
+                        onclick="sendQuickQuestion('Como denunciar lixo em um igarapé ou terreno?')"
+                        class="w-full text-left p-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-900 text-[11px] font-semibold transition-all flex items-center justify-between"
+                    >
+                        <span>
+                            📍 Como denunciar lixo irregular ou em igarapés?
+                        </span>
+
+                        <span
+                            class="material-symbols-outlined text-sm text-emerald-700"
+                        >
+                            arrow_forward
+                        </span>
+                    </button>
+
+
+                    <button
+                        onclick="sendQuickQuestion('Onde descartar recicláveis e onde ficam os ecopontos?')"
+                        class="w-full text-left p-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-900 text-[11px] font-semibold transition-all flex items-center justify-between"
+                    >
+                        <span>
+                            ♻️ Onde ficam os Ecopontos e coleta seletiva?
+                        </span>
+
+                        <span
+                            class="material-symbols-outlined text-sm text-emerald-700"
+                        >
+                            arrow_forward
+                        </span>
+                    </button>
+
+
+                    <button
+                        onclick="sendQuickQuestion('O que é a ODS 11 e qual o propósito deste projeto acadêmico?')"
+                        class="w-full text-left p-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-900 text-[11px] font-semibold transition-all flex items-center justify-between"
+                    >
+                        <span>
+                            🎓 O que é a ODS 11 e o projeto de ADS?
+                        </span>
+
+                        <span
+                            class="material-symbols-outlined text-sm text-emerald-700"
+                        >
+                            arrow_forward
+                        </span>
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- INDICADOR DIGITANDO -->
+
+            <div
+                id="typing-indicator"
+                class="hidden px-4 py-2 bg-slate-50 text-[11px] text-slate-500 italic items-center gap-1.5 border-t border-slate-100"
+            >
+
+                <span
+                    class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-bounce"
+                ></span>
+
+                <span>
+                    Curumim Verde está digitando resposta...
+                </span>
+
+            </div>
+
+
+            <!-- INPUT DO CHAT -->
+
+            <form
+                id="chat-form"
+                onsubmit="handleUserSubmit(event)"
+                class="p-3 bg-white border-t border-slate-200 flex items-center gap-2"
+            >
+
+                <input
+                    id="chat-input"
+                    type="text"
+                    placeholder="Pergunte sobre lixo, ecopontos, ODS 11, ADS..."
+                    class="flex-grow px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent bg-slate-50"
+                    autocomplete="off"
+                />
+
+                <button
+                    type="submit"
+                    class="w-10 h-10 rounded-xl bg-brand-700 hover:bg-brand-800 text-white flex items-center justify-center shadow-md transition-all flex-shrink-0"
+                >
+                    <span class="material-symbols-outlined text-lg">
+                        send
+                    </span>
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- BOTÃO FLUTUANTE -->
+
+        <button
+            id="chat-trigger-btn"
+            onclick="toggleChat()"
+            class="group relative flex items-center gap-3 px-4 py-3 rounded-full bg-brand-700 hover:bg-brand-800 text-white shadow-xl hover:shadow-2xl transition-all duration-300 animate-pulse-subtle border-2 border-emerald-400"
+        >
+
+            <div class="relative">
+
+                <span class="material-symbols-outlined text-2xl">
+                    smart_toy
+                </span>
+
+                <span
+                    class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-400 border-2 border-brand-800 rounded-full"
+                ></span>
+
+            </div>
+
+            <span class="font-bold text-xs tracking-tight pr-1">
+                Dúvidas? Fale com a IA
+            </span>
+
+        </button>
+
+    </div>
+
+
+    <!-- =========================================================
+         JAVASCRIPT DO CHATBOT
+    ========================================================== -->
+
+    <script>
+
+        // =====================================================
+        // ABRIR / FECHAR CHAT
+        // =====================================================
+
+        function toggleChat() {
+
+            const chatWindow = document.getElementById("chat-window");
+
+            if (chatWindow.classList.contains("hidden")) {
+
+                chatWindow.classList.remove("hidden");
+                chatWindow.classList.add("flex");
+
+                document.getElementById("chat-input").focus();
+
+            } else {
+
+                chatWindow.classList.add("hidden");
+                chatWindow.classList.remove("flex");
+
+            }
+        }
+
+
+        // =====================================================
+        // PERGUNTA PELO CARD
+        // =====================================================
+
+        function askFromInline(questionText) {
+
+            const chatWindow = document.getElementById("chat-window");
+
+            if (chatWindow.classList.contains("hidden")) {
+
+                chatWindow.classList.remove("hidden");
+                chatWindow.classList.add("flex");
+
+            }
+
+            sendQuickQuestion(questionText);
+        }
+
+
+        // =====================================================
+        // PERGUNTAS RÁPIDAS
+        // =====================================================
+
+        function sendQuickQuestion(questionText) {
+
+            document.getElementById("chat-input").value = questionText;
+
+            handleUserSubmit(new Event("submit"));
+        }
+
+
+        // =====================================================
+        // ENVIO DA MENSAGEM
+        // =====================================================
+
+        function handleUserSubmit(e) {
+
+            e.preventDefault();
+
+            const input = document.getElementById("chat-input");
+            const query = input.value.trim();
+
+            if (!query) {
+                return;
+            }
+
+            appendUserMessage(query);
+
+            input.value = "";
+
+            showTypingIndicator(true);
+
+            setTimeout(() => {
+
+                showTypingIndicator(false);
+
+                const botResponse = generateKnowledgeResponse(query);
+
+                appendBotMessage(botResponse);
+
+            }, 650);
+        }
+
+
+        // =====================================================
+        // MENSAGEM DO USUÁRIO
+        // =====================================================
+
+        function appendUserMessage(text) {
+
+            const container =
+                document.getElementById("chat-messages");
+
+            const messageDiv =
+                document.createElement("div");
+
+            messageDiv.className =
+                "flex items-start justify-end gap-2";
+
+            messageDiv.innerHTML = `
+                <div
+                    class="bg-brand-700 text-white rounded-2xl rounded-tr-none p-3 shadow-sm max-w-[80%] text-xs font-medium leading-relaxed"
+                >
+                    ${escapeHTML(text)}
+                </div>
+            `;
+
+            container.appendChild(messageDiv);
+
+            scrollToBottom();
+        }
+
+
+        // =====================================================
+        // MENSAGEM DO BOT
+        // =====================================================
+
+        function appendBotMessage(htmlContent) {
+
+            const container =
+                document.getElementById("chat-messages");
+
+            const messageDiv =
+                document.createElement("div");
+
+            messageDiv.className =
+                "flex items-start gap-2";
+
+            messageDiv.innerHTML = `
+                <div
+                    class="w-7 h-7 rounded-full bg-brand-700 text-white flex items-center justify-center flex-shrink-0 text-xs"
+                >
+                    <span class="material-symbols-outlined text-sm">
+                        eco
+                    </span>
+                </div>
+
+                <div
+                    class="bg-white border border-slate-200 text-slate-800 rounded-2xl rounded-tl-none p-3.5 shadow-sm max-w-[85%] text-xs leading-relaxed space-y-2"
+                >
+                    ${htmlContent}
+                </div>
+            `;
+
+            container.appendChild(messageDiv);
+
+            scrollToBottom();
+        }
+
+
+        // =====================================================
+        // INDICADOR DE DIGITAÇÃO
+        // =====================================================
+
+        function showTypingIndicator(show) {
+
+            const indicator =
+                document.getElementById("typing-indicator");
+
+            if (show) {
+
+                indicator.classList.remove("hidden");
+                indicator.classList.add("flex");
+
+            } else {
+
+                indicator.classList.add("hidden");
+                indicator.classList.remove("flex");
+
+            }
+
+            scrollToBottom();
+        }
+
+
+        // =====================================================
+        // ROLAGEM DO CHAT
+        // =====================================================
+
+        function scrollToBottom() {
+
+            const container =
+                document.getElementById("chat-messages");
+
+            container.scrollTop = container.scrollHeight;
+        }
+
+
+        // =====================================================
+        // PROTEÇÃO CONTRA HTML
+        // =====================================================
+
+        function escapeHTML(str) {
+
+            return str.replace(
+                /[&<>'"]/g,
+                (tag) =>
+                    ({
+                        "&": "&amp;",
+                        "<": "&lt;",
+                        ">": "&gt;",
+                        "'": "&#39;",
+                        '"': "&quot;",
+                    }[tag] || tag)
+            );
+        }
+
+
+        // =====================================================
+        // BASE DE CONHECIMENTO DO CURUMIM VERDE
+        // =====================================================
+
+        function generateKnowledgeResponse(query) {
+
+            const q = query
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "");
+
+
+            // DENÚNCIAS
+
+            if (
+                q.includes("denuncia") ||
+                q.includes("denunciar") ||
+                q.includes("reclamar") ||
+                q.includes("foto") ||
+                q.includes("formulario")
+            ) {
+
+                return `
+                    <p class="font-bold text-slate-900">
+                        Como denunciar lixo irregular:
+                    </p>
+
+                    <p>
+                        Você pode utilizar a seção
+                        <strong>"Registrar Denúncia"</strong>
+                        logo nesta página inicial:
+                    </p>
+
+                    <ul
+                        class="list-disc pl-4 space-y-1 text-slate-600"
+                    >
+                        <li>
+                            Informe o
+                            <strong>endereço ou ponto de referência</strong>
+                            em Manaus (ex: rua, bairro, proximidade de
+                            igarapé).
+                        </li>
+
+                        <li>
+                            Selecione o
+                            <strong>tipo de resíduo</strong>
+                            (entulho, lixo domiciliar, eletrônicos ou margens
+                            fluviais).
+                        </li>
+
+                        <li>
+                            Indique a
+                            <strong>zona da cidade</strong>
+                            (Norte, Sul, Centro-Sul, Leste, Oeste).
+                        </li>
+                    </ul>
+
+                    <p
+                        class="text-emerald-700 font-semibold mt-1"
+                    >
+                        Essa funcionalidade é o MVP oficial entregue na nossa
+                        <strong>Sprint 1</strong>!
+                    </p>
+                `;
+            }
+
+
+            // ECOPONTOS
+
+            if (
+                q.includes("ecoponto") ||
+                q.includes("coleta") ||
+                q.includes("recicla") ||
+                q.includes("reciclavel") ||
+                q.includes("onde descartar") ||
+                q.includes("pevs")
+            ) {
+
+                return `
+                    <p class="font-bold text-slate-900">
+                        Pontos de Coleta Seletiva em Manaus:
+                    </p>
+
+                    <p>
+                        Manaus conta com Postos de Entrega Voluntária (PEVs)
+                        e parcerias com cooperativas de catadores:
+                    </p>
+
+                    <ul
+                        class="list-disc pl-4 space-y-1 text-slate-600"
+                    >
+                        <li>
+                            <strong>Papel, Plástico e Metal:</strong>
+                            PEVs em supermercados parceiros nas Zonas
+                            Centro-Sul, Ponta Negra e Parque Dez.
+                        </li>
+
+                        <li>
+                            <strong>Eletrônicos e Pilhas:</strong>
+                            Devem ser entregues em postos de logística reversa
+                            para não contaminar o solo amazônico.
+                        </li>
+
+                        <li>
+                            <strong>Mapa Interativo:</strong>
+                            Está sendo desenvolvido e será entregue na
+                            <strong>Sprint 2</strong>
+                            com integração ao OpenStreetMap!
+                        </li>
+                    </ul>
+                `;
+            }
+
+
+            // IGARAPÉS
+
+            if (
+                q.includes("igarape") ||
+                q.includes("mindu") ||
+                q.includes("educandos") ||
+                q.includes("taruma") ||
+                q.includes("alagamento") ||
+                q.includes("enchente") ||
+                q.includes("chuva")
+            ) {
+
+                return `
+                    <p class="font-bold text-slate-900">
+                        Preservação dos Igarapés de Manaus:
+                    </p>
+
+                    <p>
+                        Bacias como as do
+                        <strong>Mindu, Educandos e Tarumã</strong>
+                        sofrem com descarte inadequado de plástico e entulho.
+                        Isso obstrui as calhas fluviais e intensifica os
+                        alagamentos nas cheias amazônicas.
+                    </p>
+
+                    <p class="text-slate-600">
+                        O <strong>Cidade Limpa</strong>
+                        atua na conscientização comunitária e na denúncia
+                        rápida para evitar que o lixo chegue aos leitos dos
+                        nossos rios.
+                    </p>
+                `;
+            }
+
+
+            // ODS 11
+
+            if (
+                q.includes("ods") ||
+                q.includes("ods 11") ||
+                q.includes("onu") ||
+                q.includes("11.6") ||
+                q.includes("sustentavel") ||
+                q.includes("sustentabilidade")
+            ) {
+
+                return `
+                    <p class="font-bold text-slate-900">
+                        Alinhamento com a ODS 11 da ONU:
+                    </p>
+
+                    <p>
+                        A ODS 11 visa
+                        <em>"Cidades e Comunidades Sustentáveis"</em>.
+                        Nosso projeto se conecta especificamente à
+                        <strong>Meta 11.6</strong>:
+                    </p>
+
+                    <blockquote
+                        class="border-l-2 border-emerald-600 pl-2 text-slate-600 italic"
+                    >
+                        "Reduzir o impacto ambiental negativo per capita das
+                        cidades, com especial atenção à gestão de resíduos
+                        sólidos municipais até 2030."
+                    </blockquote>
+
+                    <p>
+                        Transformamos a tecnologia em cidadania ativa para que
+                        Manaus avance no cumprimento dessa meta global.
+                    </p>
+                `;
+            }
+
+
+            // PROJETO ACADÊMICO
+
+            if (
+                q.includes("ads") ||
+                q.includes("analise") ||
+                q.includes("periodo") ||
+                q.includes("scrum") ||
+                q.includes("sprint") ||
+                q.includes("backlog") ||
+                q.includes("github") ||
+                q.includes("python") ||
+                q.includes("mysql")
+            ) {
+
+                return `
+                    <p class="font-bold text-slate-900">
+                        Sobre o Projeto Acadêmico (ADS 2º Período):
+                    </p>
+
+                    <p>
+                        Este sistema é o resultado do
+                        <strong>
+                            Projeto Integrador e Atividade Curricular de
+                            Extensão (ACEX)
+                        </strong>:
+                    </p>
+
+                    <ul
+                        class="list-disc pl-4 space-y-1 text-slate-600"
+                    >
+                        <li>
+                            <strong>Metodologia Ágil (Scrum):</strong>
+                            10 histórias de usuários priorizadas no Product
+                            Backlog totalizando 50 Story Points divididos em
+                            3 Sprints quinzenais.
+                        </li>
+
+                        <li>
+                            <strong>Stack de ADS:</strong>
+                            Frontend dinâmico em HTML5/CSS3/JavaScript,
+                            backend com Python Flask e banco de dados
+                            relacional MySQL 8.0.
+                        </li>
+
+                        <li>
+                            <strong>Código Aberto:</strong>
+                            Toda a estrutura foi organizada para versionamento
+                            no GitHub e hospedagem via GitHub Pages.
+                        </li>
+                    </ul>
+                `;
+            }
+
+
+            // RESPOSTA PADRÃO
+
+            return `
+                <p class="font-bold text-slate-900">
+                    Entendido!
+                </p>
+
+                <p class="text-slate-600">
+                    Como assistente do
+                    <strong>Cidade Limpa Manaus</strong>,
+                    posso te ajudar com:
+                </p>
+
+                <ul
+                    class="list-disc pl-4 space-y-1 text-slate-600"
+                >
+                    <li>
+                        Instruções para
+                        <strong>denunciar lixo irregular</strong>
+                        em Manaus;
+                    </li>
+
+                    <li>
+                        Informações sobre os
+                        <strong>Ecopontos</strong>
+                        e separação de materiais;
+                    </li>
+
+                    <li>
+                        Detalhes da
+                        <strong>ODS 11</strong>
+                        e da metodologia Scrum de ADS
+                        (Backlog & Sprints).
+                    </li>
+                </ul>
+
+                <p
+                    class="text-emerald-700 font-semibold mt-1"
+                >
+                    Clique em uma das perguntas sugeridas acima ou digite
+                    outra dúvida!
+                </p>
+            `;
+        }
+
+    </script>
 
 </body>
 
 </html>
-```
